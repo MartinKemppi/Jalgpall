@@ -8,16 +8,18 @@ namespace Football;
 
 public class Team
 {
-    public List<Player> Players { get; } = new List<Player>();
-    public string Name { get; private set; }
-    public Game Game { get; set; }
+    //väljud
+    public List<Player> Players { get; } = new List<Player>(); // nimekiri objekti mängija
+    public string Name { get; private set; } // meeskonna nimi
+    public Game Game { get; set; } // määrame mängu
 
-    public Team(string name)
+    //konstruktor
+    public Team(string name) // sõltub sõnest ja sõne võrdleb Namega
     {
         Name = name;
     }
 
-    public void StartGame(int width, int height)
+    public void StartGame(int width, int height) // alustame mängu laius ja kõrgus
     {
         Random rnd = new Random();
         foreach (var player in Players)
@@ -30,24 +32,24 @@ public class Team
         }
     }
 
-    public void AddPlayer(Player player)
+    public void AddPlayer(Player player) // lisame mängijat
     {
         if (player.Team != null) return;
         Players.Add(player);
         player.Team = this;
     }
 
-    public (double, double) GetBallPosition()
+    public (double, double) GetBallPosition() // saame palli pos.
     {
         return Game.GetBallPositionForTeam(this);
     }
 
-    public void SetBallSpeed(double vx, double vy)
+    public void SetBallSpeed(double vx, double vy) // määrame palli kiirust
     {
         Game.SetBallSpeedForTeam(this, vx, vy);
     }
 
-    public Player GetClosestPlayerToBall()
+    public Player GetClosestPlayerToBall() // Saame lähim mängija pallini
     {
         Player closestPlayer = Players[0];
         double bestDistance = Double.MaxValue;
@@ -64,7 +66,7 @@ public class Team
         return closestPlayer;
     }
 
-    public void Move()
+    public void Move() // liigume palli suunas
     {
         GetClosestPlayerToBall().MoveTowardsBall();
         Players.ForEach(player => player.Move());

@@ -11,9 +11,9 @@ public class Ball
     public double X { get; private set; }
     public double Y { get; private set; }
 
-    private double _vx, _vy;
+    private double _vx, _vy; // palli lennu kaugus
 
-    private Game _game;
+    private Game _game; //  pall mängus
 
     public Ball(double x, double y, Game game)
     {

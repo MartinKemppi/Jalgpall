@@ -8,11 +8,13 @@ namespace Football;
 
 public class Game
 {
-    public Team HomeTeam { get; }
+    //väljud
+    public Team HomeTeam { get; } 
     public Team AwayTeam { get; }
     public Stadium Stadium { get; }
     public Ball Ball { get; private set; }
 
+    //konstruktor
     public Game(Team homeTeam, Team awayTeam, Stadium stadium)
     {
         HomeTeam = homeTeam;
@@ -22,28 +24,28 @@ public class Game
         Stadium = stadium;
     }
 
-    public void Start()
+    public void Start() // alustame mängu, paneme palli keskele, meeskonnad oma poolele
     {
         Ball = new Ball(Stadium.Width / 2, Stadium.Height / 2, this);
         HomeTeam.StartGame(Stadium.Width / 2, Stadium.Height);
         AwayTeam.StartGame(Stadium.Width / 2, Stadium.Height);
     }
-    private (double, double) GetPositionForAwayTeam(double x, double y) //Pos meeskonnale teistele
+    private (double, double) GetPositionForAwayTeam(double x, double y) // Pos meeskonnale teistele
     {
         return (Stadium.Width - x, Stadium.Height - y);
     }
 
-    public (double, double) GetPositionForTeam(Team team, double x, double y) //Pos meeskonnale esimesele
+    public (double, double) GetPositionForTeam(Team team, double x, double y) // Pos meeskonnale esimesele
     {
         return team == HomeTeam ? (x, y) : GetPositionForAwayTeam(x, y);
     }
 
-    public (double, double) GetBallPositionForTeam(Team team)
+    public (double, double) GetBallPositionForTeam(Team team) // Pos. palli meeskonna jaoks
     {
         return GetPositionForTeam(team, Ball.X, Ball.Y);
     }
 
-    public void SetBallSpeedForTeam(Team team, double vx, double vy)
+    public void SetBallSpeedForTeam(Team team, double vx, double vy)  // määrame palli kiirust meeskonnale
     {
         if (team == HomeTeam)
         {
@@ -55,7 +57,7 @@ public class Game
         }
     }
 
-    public void Move()
+    public void Move() //liikumine, mõlema meeskonnale ja pallile
     {
         HomeTeam.Move();
         AwayTeam.Move();
