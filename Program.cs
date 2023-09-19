@@ -35,28 +35,60 @@ namespace Football
             t2.AddPlayer(p8);
             t2.AddPlayer(p9);
 
-            Stadium s = new Stadium(100, 80);
+
+            // Ei tööta kuna peab olema suurus rohkem kui 0 või töötab, aga ei nii nagu peab
+            //Console.BufferWidth = 800; 
+            //Console.BufferHeight = 600;
+
+            //Walls
+            int mapWidth = 100;
+            int mapHeight = 80;
+            
+            // t1 players on their side
+            p1.SetPosition(mapWidth / 4, mapHeight / 2);
+            p2.SetPosition(mapWidth / 4, mapHeight / 3);
+            p3.SetPosition(mapWidth / 4, mapHeight / 4);
+            p4.SetPosition(mapWidth / 4, mapHeight / 5);
+
+            // t2 players on their side
+            p6.SetPosition((3 * mapWidth) / 4, mapHeight / 2);
+            p7.SetPosition((3 * mapWidth) / 4, mapHeight / 3);
+            p8.SetPosition((3 * mapWidth) / 4, mapHeight / 4);
+            p9.SetPosition((3 * mapWidth) / 4, mapHeight / 5);
+
+
+            Walls walls = new Walls(mapWidth, mapHeight);
+            Stadium s = new Stadium(mapWidth - 2, mapHeight - 2);
+
+            walls.Draw();
+            s.Draw();
             //Walls wall = new Walls(98, 78);
             //wall.Draw();
 
-            Point p = new Point(num, num, '*');
+            //Point p = new Point(num, num, '*');
 
-            Game g = new Game(t1, t2, s);
-            g.Start();
-            while (true)
-            {
-                Console.Clear();
+            //Game g = new Game(t1, t2, s);
+            //g.Start();
+            //while (true)
+            //{
+            //    Console.Clear();
 
-                if (!g.IsRunning)
-                {
-                    Console.WriteLine("Game Over!");
-                    break;
-                }
+            //    // Draw the walls
+            //    walls.Draw();
 
-                g.Move();
+            //    // Draw the stadium
+            //    s.Draw();
 
-                Thread.Sleep(100);
-            }
+            //    if (!g.IsRunning)
+            //    {
+            //        Console.WriteLine("Game Over!");
+            //        break;
+            //    }
+
+            //    g.Move();
+
+            //    Thread.Sleep(1000);
+            //}
         }
 
         private static bool IsPlayerAtPosition(int x, int y, List<Player> players)
