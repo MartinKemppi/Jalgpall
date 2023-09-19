@@ -13,6 +13,7 @@ public class Game
     public Team AwayTeam { get; }
     public Stadium Stadium { get; }
     public Ball Ball { get; private set; }
+    public bool IsRunning { get; private set; } = true;
 
     //konstruktor
     public Game(Team homeTeam, Team awayTeam, Stadium stadium)
@@ -22,6 +23,11 @@ public class Game
         AwayTeam = awayTeam;
         awayTeam.Game = this;
         Stadium = stadium;
+    }
+
+    public void Stop()
+    {
+        IsRunning = false;
     }
 
     public void Start() // alustame mängu, paneme palli keskele, meeskonnad oma poolele
