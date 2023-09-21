@@ -15,8 +15,8 @@ public class Player
     private double _vx, _vy; // mängija ja palli kaugus
     public Team? Team { get; set; } = null; // meeskond, kus mängija mängib
 
-    private const double MaxSpeed = 5; // Max mängija kiirus
-    private const double MaxKickSpeed = 25; //  Max löögi kiirus
+    private const double MaxSpeed = 1; // Max mängija kiirus
+    private const double MaxKickSpeed = 15; //  Max löögi kiirus 25 --> 15
     private const double BallKickDistance = 10; // löögikaugus
 
     private Random _random = new Random(); // juhuslik arv
@@ -92,5 +92,18 @@ public class Player
         {
             _vx = _vy = 0;
         }
+    }
+
+    public char Symbol { get; } // Define a property to store the player's symbol
+
+    public Player(char symbol)
+    {
+        Symbol = symbol;
+    }
+
+    public void Draw()
+    {
+        Console.SetCursorPosition((int)Math.Round(X), (int)Math.Round(Y));
+        Console.Write(Symbol); // Use the Symbol property to display the player's symbol
     }
 }
