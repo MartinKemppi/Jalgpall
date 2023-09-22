@@ -16,6 +16,13 @@ public class Ball
 
     private Game _game; //  pall mängus
 
+    private void ResetToCenter()
+    {
+        X = _game.Stadium.Width / 2;
+        Y = _game.Stadium.Height / 2;
+        _vx = _vy = 0;
+    }
+
     public Ball(double x, double y, Game game, char symbol = 'o') // Added a default symbol 'o'
     {
         _game = game;
@@ -32,17 +39,16 @@ public class Ball
 
     public void Move()
     {
-        double newX = X + _vx;
-        double newY = Y + _vy;
-        if (_game.Stadium.IsIn(newX, newY))
+        double newX = X + _vx; 
+        double newY = Y + _vy; 
+        if (_game.Stadium.IsIn(newX, newY)) 
         {
-            X = newX;
+            X = newX; 
             Y = newY;
         }
         else
         {
-            _vx = 0;
-            _vy = 0;
+            ResetToCenter();
         }
     }
 
