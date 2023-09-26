@@ -25,6 +25,7 @@ public class Game
         Stadium = stadium;
     }
 
+    //Teeme stoppi juhul kui mäng ei mängi
     public void Stop()
     {
         IsRunning = false;

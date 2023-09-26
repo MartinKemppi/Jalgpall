@@ -10,8 +10,10 @@ public class Player
 {
     //väljud
     public string Name { get; } //mängija nimi
+    public char Symbol { get; } // Saame sümboli mängija jaoks
     public double X { get; private set; } //horizon. pos.
     public double Y { get; private set; } //vertical. pos.
+    
     private double _vx, _vy; // mängija ja palli kaugus
     public Team? Team { get; set; } = null; // meeskond, kus mängija mängib
 
@@ -19,12 +21,16 @@ public class Player
     private const double MaxKickSpeed = 15; //  Max löögi kiirus 25 --> 15
     private const double BallKickDistance = 10; // löögikaugus
 
-    private Random _random = new Random(); // juhuslik arv
+    private Random _random = new Random(); // juhuslik arv       
 
     //konstruktorid
     public Player(string name)  // sõltub sõnest ja sõne võrdleb Namega
     {
         Name = name;
+    }
+    public Player(char symbol) // Määrame sümboli mängija jaoks
+    {
+        Symbol = symbol;
     }
 
     public Player(string name, double x, double y, Team team) //mängija põlul, oma nimega, pos x ja y ning meeskond, kus ta mängib
@@ -94,16 +100,9 @@ public class Player
         }
     }
 
-    public char Symbol { get; } // Define a property to store the player's symbol
-
-    public Player(char symbol)
-    {
-        Symbol = symbol;
-    }
-
-    public void Draw()
+    public void Draw() // Joonistame mängija oma sümboliga
     {
         Console.SetCursorPosition((int)Math.Round(X), (int)Math.Round(Y));
-        Console.Write(Symbol); // Use the Symbol property to display the player's symbol
+        Console.Write(Symbol); 
     }
 }

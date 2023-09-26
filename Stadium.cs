@@ -22,7 +22,7 @@ public class Stadium
         return x > 1 && x < Width - 1 && y > 1 && y < Height - 3;
     }
 
-    public void Draw()
+    public void Draw() //joonistame stadiooni
     {
         // Draw the stadium within the adjusted boundaries
         Console.SetCursorPosition(3, 3); // Adjust positions for the desired spacing

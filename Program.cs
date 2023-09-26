@@ -34,21 +34,22 @@ namespace Football
             for (int i = 1; i <= 22; i++)
             {
                 Player player = new Player($"Player {i}");
+                
                 if (i <= 11)
-                {
-                    t1.AddPlayer(player);
+                {                    
+                    t1.AddPlayer(player);                    
                 }
                 else
                 {
                     t2.AddPlayer(player);
                 }
-            }            
+            }
 
             // Loome uue mängu
             Game g = new Game(t1, t2, s);
 
             // Pall keskele
-            Ball ball = new Ball(mapWidth / 2, mapHeight / 2, g);
+            Ball ball = new Ball(mapWidth / 2, mapHeight / 2, g);           
 
             // Start the game
             g.Start();
@@ -79,30 +80,29 @@ namespace Football
             }
         }
         
-        private static void DrawField(int width, int height, List<Player> team1, List<Player> team2, Ball ball)
+        private static void DrawField(int width, int height, List<Player> t1, List<Player> t2, Ball ball)
         {
             for (int y = 0; y < height; y++)
             {
-                Console.SetCursorPosition(0, y + 1); 
+                Console.SetCursorPosition(3, y + 1); 
                 
                 for (int x = 0; x < width; x++)
                 {
-                    if (IsPlayerAtPosition(x - 3, y - 3, team1))
+                    if (IsPlayerAtPosition(x, y, t1))
                     {
                         Console.ForegroundColor = ConsoleColor.Green;
                         Console.Write("H");
                         Console.ResetColor();
                     }
-                    else if (IsPlayerAtPosition(x - 3, y - 3, team2))
+                    else if (IsPlayerAtPosition(x, y, t2))
                     {
-                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.ForegroundColor = ConsoleColor.Red;                        
                         Console.Write("G");
                         Console.ResetColor();
                     }
                     else if (IsBallAtPosition(x, y, ball))
                     {
-                        
-                        Console.Write("O"); // pall
+                        ball.Draw();                        
                     }
                     else
                     {
