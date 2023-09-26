@@ -10,20 +10,27 @@ namespace Football
     {
         static void Main(string[] args)
         {
+            //Kirjutame terminali nime
             Console.Title = "Jalgpall";
 
+            //Loome 2 meeskonda
             Team t1 = new Team("Esimene");            
             Team t2 = new Team("Teine");           
 
+            //suurus x ja y
             int mapWidth = 50;
-            int mapHeight = 60;          
+            int mapHeight = 60;
 
-            // Walls
+            //määrame konsooli suurust
+            Console.SetWindowSize(mapWidth, mapHeight);
+
+            // Walls e seinad
             Walls walls = new Walls(mapWidth, mapHeight);
 
             // Stadium            
             Stadium s = new Stadium(mapWidth - 2, mapHeight - 2);
            
+            //teeme tsükli ja lisame mängijad meeskonnale
             for (int i = 1; i <= 22; i++)
             {
                 Player player = new Player($"Player {i}");
@@ -37,10 +44,10 @@ namespace Football
                 }
             }            
 
-            // Create the game
+            // Loome uue mängu
             Game g = new Game(t1, t2, s);
 
-            // Create the ball and place it in the middle
+            // Pall keskele
             Ball ball = new Ball(mapWidth / 2, mapHeight / 2, g);
 
             // Start the game
@@ -48,27 +55,30 @@ namespace Football
 
             while (true)
             {
-                // Update game state (players, ball, etc.) within the loop
+                //teeme mängu liikumiseks
                 g.Move();
 
+                //joonistame mängijad ja pall
                 DrawField(s.Width, s.Height, t1.Players, t2.Players, g.Ball);
 
                 //Console.Clear();
 
-                // Redraw walls and stadium
+                // Joonistame seinad e walls ja stadium
                 walls.Draw();
                 s.Draw();                                              
 
+                //juhul kui mäng ei mängi siis mäng lõppeb ja kirjutab game over
                 if (!g.IsRunning)
                 {
                     Console.WriteLine("Game Over!");
                     break;
                 }
 
+                //tsükli uuendamiseks
                 Thread.Sleep(100);
             }
         }
-
+        
         private static void DrawField(int width, int height, List<Player> team1, List<Player> team2, Ball ball)
         {
             for (int y = 0; y < height; y++)
@@ -77,13 +87,13 @@ namespace Football
                 
                 for (int x = 0; x < width; x++)
                 {
-                    if (IsPlayerAtPosition(x, y, team1))
+                    if (IsPlayerAtPosition(x - 3, y - 3, team1))
                     {
                         Console.ForegroundColor = ConsoleColor.Green;
                         Console.Write("H");
                         Console.ResetColor();
                     }
-                    else if (IsPlayerAtPosition(x, y, team2))
+                    else if (IsPlayerAtPosition(x - 3, y - 3, team2))
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.Write("G");
@@ -98,8 +108,7 @@ namespace Football
                     {
                         Console.Write(" "); 
                     }
-                }
-                
+                }               
             }
         }
 
@@ -108,17 +117,14 @@ namespace Football
 
             foreach (var player in players)
             {
-
                 int playerX = (int)Math.Round(player.X);
                 int playerY = (int)Math.Round(player.Y);
-
 
                 if (playerX == x && playerY == y)
                 {
                     return true;
                 }
             }
-
             return false;
         }
 
