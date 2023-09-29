@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Football;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -80,7 +81,7 @@ namespace Football
             }
         }
         
-        private static void DrawField(int width, int height, List<Player> t1, List<Player> t2, Ball ball)
+        private static void DrawField(int width, int height, List<Player> t1, List<Player> t2, Ball ball) //joonistame mängijad ja pall, värvime mängijad eristamiseks
         {
             for (int y = 0; y < height; y++)
             {
@@ -112,9 +113,8 @@ namespace Football
             }
         }
 
-        private static bool IsPlayerAtPosition(int x, int y, List<Player> players)
+        private static bool IsPlayerAtPosition(int x, int y, List<Player> players) //juhul kui mängija pos x ja pos y on õige, siis tagastame true, aga kui mitte siis false
         {
-
             foreach (var player in players)
             {
                 int playerX = (int)Math.Round(player.X);
@@ -128,11 +128,11 @@ namespace Football
             return false;
         }
 
-        private static bool IsBallAtPosition(int x, int y, Ball ball)
+        private static bool IsBallAtPosition(int x, int y, Ball ball) //saame teada kas pall on kohal v ei, saame palli x ja y pos ja tagastaeme selle x ja y pos
         {
             int ballX = (int)Math.Round(ball.X);
             int ballY = (int)Math.Round(ball.Y);
             return ballX == x && ballY == y;
-        }        
+        }
     }
 }

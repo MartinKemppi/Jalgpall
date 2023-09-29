@@ -36,6 +36,5 @@ public class Stadium
         }
         Console.SetCursorPosition(3, Height - 2); // Adjust positions for the desired spacing
         Console.WriteLine(new string('-', Width - 4)); // Adjust width and subtract 4
-
     }
 }

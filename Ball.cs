@@ -10,7 +10,7 @@ public class Ball
 {
     public double X { get; private set; }
     public double Y { get; private set; }
-    public char Symbol { get; }
+    public string Symbol { get; }
 
     private double _vx, _vy; // palli lennu kaugus
 
@@ -23,7 +23,7 @@ public class Ball
         _vx = _vy = 0;
     }
 
-    public Ball(double x, double y, Game game, char symbol = 'o') // Added a default symbol 'o'
+    public Ball(double x, double y, Game game, string symbol = "o") // Added a default symbol 'o'
     {
         _game = game;
         X = x;

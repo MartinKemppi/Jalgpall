@@ -14,6 +14,8 @@ public class Game
     public Stadium Stadium { get; }
     public Ball Ball { get; private set; }
     public bool IsRunning { get; private set; } = true;
+    public int ScoreH { get; private set; }
+    public int ScoreG { get; private set; }
 
     //konstruktor
     public Game(Team homeTeam, Team awayTeam, Stadium stadium)
@@ -69,5 +71,24 @@ public class Game
         HomeTeam.Move();
         AwayTeam.Move();
         Ball.Move();
+
+        if (Ball.Y <= 3) // juhul kui pall pos Y on vähem v võrdleb 3-ga siis +1 Guest meeskond saab +1 tulemust, kustutame konsooli ja näitame tulemust ja vastupidi ka teisele meeskonnale
+        {
+            ScoreG++; // Guest team score
+            Console.Clear();
+            Console.WriteLine($"Guest Team: {ScoreG}");
+            Console.WriteLine($"Home Team: {ScoreH}");
+            Thread.Sleep(1000);
+            Console.Clear();
+        }
+        else if (Ball.Y >= Stadium.Height - 3) 
+        {
+            ScoreH++; // Home team score
+            Console.Clear();
+            Console.WriteLine($"Guest Team: {ScoreG}");
+            Console.WriteLine($"Home Team: {ScoreH}");
+            Thread.Sleep(1000);
+            Console.Clear();
+        }
     }
 }
